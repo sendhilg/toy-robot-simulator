@@ -3,7 +3,7 @@ from toy_robot.coordinate import InvalidCoordinatesException
 from toy_robot.facing import InvalidFacingDirectionException
 from toy_robot.robot import (
     InvalidParametersForPlaceException,
-    MissingPlaceCommandException, 
+    MissingPlaceCommandException,
     MoveOutOfBoundsException,
     Robot,
 )

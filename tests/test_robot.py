@@ -70,7 +70,7 @@ def test_move_on_robot_not_placed():
     with pytest.raises(MissingPlaceCommandException) as e:
         robot = Robot()
         robot.move()
-    assert str(e.value) == 'Cannot move robot until placed.'
+    assert str(e.value) == 'Robot not placed.'
     assert robot.coordinate is None
     assert robot.coordinate is None
     assert robot.facing is None
@@ -120,7 +120,7 @@ def test_turn_left_on_robot_not_placed():
     with pytest.raises(MissingPlaceCommandException) as e:
         robot = Robot()
         robot.turn_left()
-    assert str(e.value) == 'Cannot turn robot until placed.'
+    assert str(e.value) == 'Robot not placed.'
     assert robot.coordinate is None
     assert robot.coordinate is None
     assert robot.facing is None
@@ -145,7 +145,7 @@ def test_turn_right_on_robot_not_placed():
     with pytest.raises(MissingPlaceCommandException) as e:
         robot = Robot()
         robot.turn_right()
-    assert str(e.value) == 'Cannot turn robot until placed.'
+    assert str(e.value) == 'Robot not placed.'
     assert robot.coordinate is None
     assert robot.coordinate is None
     assert robot.facing is None
@@ -170,7 +170,7 @@ def test_report_on_robot_not_placed():
     with pytest.raises(MissingPlaceCommandException) as e:
         robot = Robot()
         robot.report()
-    assert str(e.value) == 'Cannot report on robot until placed.'
+    assert str(e.value) == 'Robot not placed.'
     assert robot.coordinate is None
     assert robot.coordinate is None
     assert robot.facing is None

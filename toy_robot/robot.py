@@ -14,6 +14,14 @@ class MoveOutOfBoundsException(Exception):
     pass
 
 
+def is_robot_placed(decorated_func):
+    def placed(self):
+        if not self.coordinate:
+            raise MissingPlaceCommandException('Robot not placed.')
+        decorated_func(self)
+    return placed
+
+
 class Robot(object):
     def __init__(self):
         self.coordinate = None
@@ -44,17 +52,13 @@ class Robot(object):
                 'Invalid number of parameters for PLACE.'
                 )
 
+    @is_robot_placed
     def move(self):
         """
         Move the robot one unit in the direction it is currently facing.
         Any move that will cause the robot to go out of bounds
         will raise an exception.
         """
-        if not self.coordinate:
-            raise MissingPlaceCommandException(
-                'Cannot move robot until placed.'
-                )
-
         if (self.facing.direction == 'NORTH'
                 and self.coordinate.y < Table.MAX.value):
             self.coordinate.y += 1
@@ -72,13 +76,9 @@ class Robot(object):
                 'Cannot move robot. Coordinates out of bound.'
                 )
 
+    @is_robot_placed
     def turn_left(self):
         """Turn the robot 90 degrees left from the current direction."""
-        if not self.coordinate:
-            raise MissingPlaceCommandException(
-                'Cannot turn robot until placed.'
-                )
-
         self.facing.direction = {
             'NORTH': 'WEST',
             'WEST': 'SOUTH',
@@ -86,13 +86,9 @@ class Robot(object):
             'EAST': 'NORTH'
         }.get(self.facing.direction)
 
+    @is_robot_placed
     def turn_right(self):
         """Turn the robot 90 degrees right from the current direction."""
-        if not self.coordinate:
-            raise MissingPlaceCommandException(
-                'Cannot turn robot until placed.'
-                )
-
         self.facing.direction = {
             'NORTH': 'EAST',
             'EAST': 'SOUTH',
@@ -100,11 +96,8 @@ class Robot(object):
             'WEST': 'NORTH'
         }.get(self.facing.direction)
 
+    @is_robot_placed
     def report(self):
-        if not self.coordinate:
-            raise MissingPlaceCommandException(
-                'Cannot report on robot until placed.'
-                )
         print(
             f'Output: {self.coordinate.x}, {self.coordinate.y}, '
             f'{self.facing.direction}'
