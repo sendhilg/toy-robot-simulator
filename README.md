@@ -13,7 +13,7 @@ To check the version on your machine run the below command:
 ## Running the application
 Clone the project from github. Change into the project directory toy_robot_simulator.
 
-The application can either accept inputs from the command line or from an input file.
+The application can accept input from the command line or from an input file.
 
 To accept input from the command line, type the below, press enter and start entering commands:
 
@@ -47,7 +47,7 @@ Output: 0,0,WEST
 ## Unit Tests
 
 ### Prerequisites
-pytest library is required for running the application's unit tests. Install pytest. Also optionally install pytest-cov if the code coverage needs to be checked.
+pytest library is required for running the application's unit tests. Install pytest, also optionally install pytest-cov if the code coverage needs to be checked.
 
     $ pip install pytest
     $ pip install pytest-cov
