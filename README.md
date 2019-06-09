@@ -11,20 +11,20 @@ To check the version on your machine run the below command:
     $ python --version
 
 ## Installation
-Check out the source from github into a directory on your machine.
+Clone the project from github.
 
-Change into the directory and install the application using the below command. It is recommended to create a python virtual environment in the changed directory and then install the application within that virtual environment.
+Change into the project directory toy_robot_simulator and install the application using the below command. It is recommended to create a python virtual environment in the changed directory and then install the application within that virtual environment.
 
     $ python setup.py install
 
 ## Running the application
 The application can either accept inputs from the command line or from an input file.
 
-To accept input from the command line, run the below command:
+To accept input from the command line, run the below command from the project directory:
 
     $ python toy_robot
 
-To accept input from an input file, run the below command:
+To accept input from an input file, run the below command,run the below command from the project directory:
 
     $ cat /path/to/input_file | python toy_robot
 
