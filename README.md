@@ -1,7 +1,7 @@
 # Toy Robot Simulator
 
 ## Description
-The application is completed as a task following the requirments in [brief](BRIEF.md).
+The application is completed as a task following the requirements in [brief](BRIEF.md).
 
 ## Requirements
 The application was developed using python version 3.7.3
@@ -10,25 +10,20 @@ To check the version on your machine run the below command:
 
     $ python --version
 
-## Installation
-Clone the project from github.
-
-Change into the project directory toy_robot_simulator and install the application using the below command. It is recommended to create a python virtual environment in the changed directory and then install the application within that virtual environment.
-
-    $ python setup.py install
-
 ## Running the application
+Clone the project from github. Change into the project directory toy_robot_simulator.
+
 The application can either accept inputs from the command line or from an input file.
 
-To accept input from the command line, run the below command from the project directory:
+To accept input from the command line, type the below, press enter and start entering commands:
 
     $ python toy_robot
 
-To accept input from an input file, run the below command,run the below command from the project directory:
+To accept input from an input file, create input file with the commands, type the below and press enter:
 
     $ cat /path/to/input_file | python toy_robot
 
-Following commands are accepted
+Following commands are accepted at the command line. 
 * `PLACE X,Y,FACING` will put the toy robot on the table in position X,Y and the facing direction.
 * `MOVE` will move the toy robot one unit forward in the direction it is currently facing.
 * `LEFT` and `RIGHT` will rotate the robot 90 degrees in the specified direction.

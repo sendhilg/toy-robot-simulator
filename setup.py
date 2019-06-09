@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="toy-robot",
+    name="toy_robot",
     version="1.0.0",
     author="Sendhil",
     author_email="sendhil@example.com",
