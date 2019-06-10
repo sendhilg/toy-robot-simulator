@@ -1,6 +1,6 @@
 import sys
 
-from toy_robot.simulator import Simulator
+from .simulator import Simulator
 
 
 def main():
