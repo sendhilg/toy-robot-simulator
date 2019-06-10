@@ -1,12 +1,9 @@
-from toy_robot.command import Command, CommandNotFoundException
-from toy_robot.coordinate import InvalidCoordinatesException
-from toy_robot.facing import InvalidFacingDirectionException
-from toy_robot.robot import (
-    InvalidParametersForPlaceException,
-    MissingPlaceCommandException,
-    MoveOutOfBoundsException,
-    Robot,
-)
+from .command import Command, CommandNotFoundException
+from .coordinate import InvalidCoordinatesException
+from .facing import InvalidFacingDirectionException
+from .robot import (InvalidParametersForPlaceException,
+                    MissingPlaceCommandException, MoveOutOfBoundsException,
+                    Robot)
 
 
 class Simulator(object):

@@ -1,5 +1,5 @@
-from toy_robot.coordinate import Coordinate, Table
-from toy_robot.facing import Facing
+from .coordinate import Coordinate, Table
+from .facing import Facing
 
 
 class InvalidParametersForPlaceException(Exception):
