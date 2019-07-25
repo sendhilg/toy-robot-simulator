@@ -1,8 +1,8 @@
-from .command import Command, CommandNotFoundException
-from .coordinate import InvalidCoordinatesException
-from .facing import InvalidFacingDirectionException
-from .robot import (InvalidParametersForPlaceException,
-                    MissingPlaceCommandException, MoveOutOfBoundsException,
+from .command import (Command, CommandNotFoundException,
+                      InvalidCoordinatesException,
+                      InvalidFacingDirectionException,
+                      InvalidParametersForPlaceException)
+from .robot import (MissingPlaceCommandException, MoveOutOfBoundsException,
                     Robot)
 
 
@@ -15,7 +15,12 @@ class Simulator(object):
         is_successful = True
         try:
             identifier, params = self.command.parse(line)
-        except CommandNotFoundException as e:
+        except (
+            CommandNotFoundException,
+            InvalidParametersForPlaceException,
+            InvalidFacingDirectionException,
+            InvalidCoordinatesException,
+        ) as e:
             print(f'Error processing {line}: {e}')
             is_successful = False
         else:
@@ -24,9 +29,6 @@ class Simulator(object):
             except (
                 MoveOutOfBoundsException,
                 MissingPlaceCommandException,
-                InvalidParametersForPlaceException,
-                InvalidFacingDirectionException,
-                InvalidCoordinatesException
             ) as e:
                 print(f'Error processing command {identifier}: {e}')
                 is_successful = False

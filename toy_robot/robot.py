@@ -1,9 +1,4 @@
-from .coordinate import Coordinate, Table
-from .facing import Facing
-
-
-class InvalidParametersForPlaceException(Exception):
-    pass
+from enum import Enum
 
 
 class MissingPlaceCommandException(Exception):
@@ -14,9 +9,14 @@ class MoveOutOfBoundsException(Exception):
     pass
 
 
+class Table(Enum):
+    MIN = 0
+    MAX = 5
+
+
 def is_robot_placed(decorated_func):
     def placed(self):
-        if not self.coordinate:
+        if self.x_coordinate is None or self.y_coordinate is None:
             raise MissingPlaceCommandException('Robot not placed.')
         decorated_func(self)
     return placed
@@ -24,33 +24,14 @@ def is_robot_placed(decorated_func):
 
 class Robot(object):
     def __init__(self):
-        self.coordinate = None
+        self.x_coordinate = None
+        self.y_coordinate = None
         self.facing = None
 
-    @property
-    def coordinate(self):
-        return self._coordinate
-
-    @coordinate.setter
-    def coordinate(self, coordinate):
-        self._coordinate = coordinate
-
-    @property
-    def facing(self):
-        return self._facing
-
-    @facing.setter
-    def facing(self, facing):
-        self._facing = facing
-
     def place(self, params):
-        if params and len(params) > 2:
-            self.coordinate = Coordinate(params[0], params[1])
-            self.facing = Facing(params[2])
-        else:
-            raise InvalidParametersForPlaceException(
-                'Invalid number of parameters for PLACE.'
-                )
+        self.x_coordinate = params[0]
+        self.y_coordinate = params[1]
+        self.facing = params[2]
 
     @is_robot_placed
     def move(self):
@@ -59,49 +40,43 @@ class Robot(object):
         Any move that will cause the robot to go out of bounds
         will raise an exception.
         """
-        if (self.facing.direction == 'NORTH'
-                and self.coordinate.y < Table.MAX.value):
-            self.coordinate.y += 1
-        elif (self.facing.direction == 'SOUTH'
-                and self.coordinate.y > Table.MIN.value):
-            self.coordinate.y -= 1
-        elif (self.facing.direction == 'EAST'
-                and self.coordinate.x < Table.MAX.value):
-            self.coordinate.x += 1
-        elif (self.facing.direction == 'WEST'
-                and self.coordinate.x != Table.MIN.value):
-            self.coordinate.x -= 1
+        if self.facing == 'NORTH' and self.y_coordinate < Table.MAX.value:
+            self.y_coordinate += 1
+        elif self.facing == 'SOUTH' and self.y_coordinate > Table.MIN.value:
+            self.y_coordinate -= 1
+        elif self.facing == 'EAST' and self.x_coordinate < Table.MAX.value:
+            self.x_coordinate += 1
+        elif self.facing == 'WEST' and self.x_coordinate != Table.MIN.value:
+            self.x_coordinate -= 1
         else:
             raise MoveOutOfBoundsException(
-                'Cannot move robot. Coordinates out of bound.'
-                )
+                'Cannot move robot. Coordinates out of bound.')
 
     @is_robot_placed
     def turn_left(self):
         """Turn the robot 90 degrees left from the current direction."""
-        self.facing.direction = {
+        self.facing = {
             'NORTH': 'WEST',
             'WEST': 'SOUTH',
             'SOUTH': 'EAST',
             'EAST': 'NORTH'
-        }.get(self.facing.direction)
+        }.get(self.facing)
 
     @is_robot_placed
     def turn_right(self):
         """Turn the robot 90 degrees right from the current direction."""
-        self.facing.direction = {
+        self.facing = {
             'NORTH': 'EAST',
             'EAST': 'SOUTH',
             'SOUTH': 'WEST',
             'WEST': 'NORTH'
-        }.get(self.facing.direction)
+        }.get(self.facing)
 
     @is_robot_placed
     def report(self):
         print(
-            f'Output: {self.coordinate.x}, {self.coordinate.y}, '
-            f'{self.facing.direction}'
-            )
+            f'Output: {self.x_coordinate}, {self.y_coordinate}, {self.facing}'
+        )
 
     def invoke(self, identifier, params):
         if identifier == 'PLACE':

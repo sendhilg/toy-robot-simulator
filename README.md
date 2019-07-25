@@ -65,4 +65,4 @@ Navigate to the repository and run the below command to run the tests.
 
 Run the below command to run the tests displaying code coverage.
 
-    $ pytest --cov=toy_robot tests/
+    $ pytest --cov=toy_robot

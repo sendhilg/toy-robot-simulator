@@ -1,0 +1,9 @@
+[run]
+omit =
+  *tests/*,
+  *venv*,
+  *urls.py,
+  *wsgi/*,
+  conftest.py
+  setup.py
+  toy_robot/__init__.py
